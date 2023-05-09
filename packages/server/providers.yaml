@@ -659,6 +659,32 @@ twitter-v2:
         grant_type: refresh_token
     default_scopes:
         - offline.access
+twinfield:
+    auth_mode: OAUTH2
+    authorization_url: https://login.twinfield.com/auth/authentication/connect/authorize
+    token_url: https://login.twinfield.com/auth/authentication/connect/token
+
+    ##########
+    # Optional fields
+    ##########
+    authorization_params: # Additional parameters to pass along in the authorization step
+        response_type: code
+    token_params: # Additional parameters to pass along in the token request
+        mycoolparam: value
+    refresh_params: # Additional parameters to pass along in the refresh token request (defauts to the 'token_params')
+        grant_type: refresh_token
+    refresh_url: https://api.example.com/oauth/refresh # The URL to use for refreshing the access token (only if different from token_url) Warning: currently unused, requires code change before using
+    scope_separator: ',' # String to use to separate scopes. Defaults to ' ' (1 space) if not provided
+
+    # Metadata capture
+    redirect_uri_metadata:
+        - subdomain # Save the 'subdomain' query parameter value returned in the Redirect URI (Connection Metadata)
+    token_response_metadata:
+        - scopes # Save the 'scopes' query parameter value returned in the token response (Connection Metadata)
+
+    # Proxy API Call
+    base_api_url: https://api.example.com # base URL only, do not include any versions (v1/v2 in the base)
+    docs: https://api.docs.com # reference to the api's documentation
 uber:
     auth_mode: OAUTH2
     authorization_url: https://login.uber.com/oauth/v2/authorize
